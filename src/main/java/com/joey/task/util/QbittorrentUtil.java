@@ -81,21 +81,22 @@ public class QbittorrentUtil {
                 return false;
             }
         }
-        HttpResponse response = doAddTorrents(fileUrl, sid, qbittorrentSavePath);
+        HttpResponse response = doAddTorrents(fileUrl, sid, qbittorrentSavePath, tag);
 
         if (!"Ok.".equals(response.body())) {
-            doAddTorrents(fileUrl, sid, qbittorrentSavePath);
+            doAddTorrents(fileUrl, sid, qbittorrentSavePath, tag);
         }
         return true;
     }
 
 
-    private HttpResponse doAddTorrents(String fileUrl, String sid, String savePath) {
+    private HttpResponse doAddTorrents(String fileUrl, String sid, String savePath, String tag) {
         HttpResponse response = HttpUtil.createPost(qbittorrentUrl + "/api/v2/torrents/add").cookie(sid).form("urls", fileUrl).form("autoTMM", false).form("savepath", savePath).form("paused", false).form("contentLayout", "Original")
                 //下载限制
                 .form("dlLimit", "NaN")
                 //上传限制
-                .form("upLimit", "NaN").execute();
+                .form("upLimit", "NaN")
+                .form("tags", tag).execute();
        log.info("添加种子返回:" + response.body());
         return response;
     }
