@@ -36,6 +36,8 @@ qbittorrent:
     savePath: /pt/pter
     # 最大上传速度（MB）
     uploadLimit: 50
+    # 最大下载传速度（MB）
+    downloadLimit: 50
 
 spring:
     redis:

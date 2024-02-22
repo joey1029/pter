@@ -28,6 +28,13 @@ public class QbittorrentUtil {
     @Value("${qbittorrent.savePath}")
     private String qbittorrentSavePath;
 
+    @Value("${qbittorrent.uploadLimit}")
+    private Integer qbittorrentUploadLimit;
+
+    @Value("${qbittorrent.downloadLimit}")
+    private Integer qbittorrentDownloadLimit;
+
+
     public String login() {
         HttpResponse response = HttpUtil.createPost(qbittorrentUrl + "/api/v2/auth/login").form("username", qbittorrentUsername).form("password", qbittorrentPassword).execute();
         if (response.getStatus() == 200) {
@@ -76,7 +83,7 @@ public class QbittorrentUtil {
                 QueueUtils.getQueueObject(Constants.PTERQUEUE);
                 QueueUtils.addQueueObject(Constants.PTERQUEUE, System.currentTimeMillis());
             } else {
-                 log.info("限流了");
+                log.info("限流了");
                 continueFlag.set(false);
                 return false;
             }
@@ -89,15 +96,14 @@ public class QbittorrentUtil {
         return true;
     }
 
-
     private HttpResponse doAddTorrents(String fileUrl, String sid, String savePath, String tag) {
         HttpResponse response = HttpUtil.createPost(qbittorrentUrl + "/api/v2/torrents/add").cookie(sid).form("urls", fileUrl).form("autoTMM", false).form("savepath", savePath).form("paused", false).form("contentLayout", "Original")
                 //下载限制
-                .form("dlLimit", "NaN")
+                .form("dlLimit", qbittorrentDownloadLimit * 1024 * 1024)
                 //上传限制
-                .form("upLimit", "NaN")
+                .form("upLimit", qbittorrentUploadLimit * 1024 * 1024)
                 .form("tags", tag).execute();
-       log.info("添加种子返回:" + response.body());
+        log.info("添加种子返回:" + response.body());
         return response;
     }
 
