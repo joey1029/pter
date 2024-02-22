@@ -1,0 +1,57 @@
+server:
+    port: 29223
+
+redisson:
+    keyPrefix:
+    threads: 4
+    nettyThreads: 8
+    singleServerConfig:
+        clientName: pter
+        connectionMinimumIdleSize: 8
+        connectionPoolSize: 32
+        idleConnectionTimeout: 10000
+        timeout: 3000
+        subscriptionConnectionPoolSize: 50
+
+
+pter:
+    # 官种页面（带排序参数,按照做种人数升序）
+    url: https://pterclub.com/officialgroup.php?inclbookmarked=0&incldead=1&spstate=2&&sort=7&type=asc&tag_internal=yes&page=
+    # cookie【需要修改】
+    cookie: xxxx
+    # 保种最大大小（MB）【需要修改】
+    maxDefendSize: 900
+    # qb保种标签
+    tag: pter
+
+
+qbittorrent:
+    # qb地址【需要修改】
+    url: http://192.168.3.10:8085
+    # 用户名【需要修改】
+    username: admin
+    # 密码【需要修改】
+    password: admin
+    # 保存路径【需要修改】
+    savePath: /pt/pter
+    # 最大上传速度（MB）
+    uploadLimit: 50
+
+spring:
+    redis:
+        # 地址【需要修改】
+        host: 192.168.3.10
+        # 端口，默认为6379【需要修改】
+        port: 6379
+        # 数据库索引
+        database: 0
+        # 密码(如没有密码请注释掉)
+        # password:
+        # 连接超时时间
+        timeout: 10s
+        # 是否开启ssl
+        ssl: false
+
+quartz:
+    # 时间正则（每小时一次）
+    cron: 0 10 0/1 * * ?
