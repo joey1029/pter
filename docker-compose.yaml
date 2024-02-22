@@ -1,6 +1,6 @@
 version: '3'
 services:
-  dynamics_defend_torrent:
+  defend_cat:
     image: joey1029/defend_cat:1.0.0
     restart: always
     container_name: defend_cat
@@ -11,3 +11,14 @@ services:
       - 【修改后的application.yml文件路径】:/application.yml
     # 启动命令【不需要修改】
     command: java -jar /joey/server/pter-1.0.0.jar --spring.config.location=/application.yml
+    depends_on:
+      - redis
+
+  redis:
+    image: redis
+    restart: always
+    container_name: redis
+    ports:
+      - 6379:6379
+    network_mode: bridge
+
