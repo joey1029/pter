@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.joey</groupId>
     <artifactId>pter</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>pter</name>
     <description>rss猫站</description>
 
