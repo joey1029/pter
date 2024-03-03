@@ -57,3 +57,14 @@ spring:
 quartz:
     # 时间正则（每小时一次）
     cron: 0 10 0/1 * * ?
+
+tr:
+    # tr地址【需要修改】
+    url: http://192.168.3.10:9091
+    # 用户名【需要修改】
+    username: admin
+    # 密码【需要修改】
+    password: admin
+    # 错误信息包含（多个用分号分割）【需要修改】
+    errorMsg: err torrent banned;torrent does not exist
+
