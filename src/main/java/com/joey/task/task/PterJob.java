@@ -131,7 +131,7 @@ public class PterJob extends QuartzJobBean {
                 continue;
             }
             //做种+下载人数在2-5人
-            if (seeder >= 2 && seeder + leecher < Constants.maxSeeder) {
+            if (seeder >= 2 && seeder + leecher <= Constants.maxSeeder) {
                 String sizeStr = tdEls.get(11).text();
 //                float torSize = new BigDecimal(sizeStr.split(" ")[0]).floatValue();
                 float torSize = convertMB(sizeStr);
@@ -152,7 +152,7 @@ public class PterJob extends QuartzJobBean {
                 }
             }
             //做种人数大于等于7人
-            else if (seeder >= Constants.maxSeeder) {
+            else if (seeder > Constants.maxSeeder) {
                 sevenTorrentCnt++;
             }
             if (sevenTorrentCnt > maxSevenTorrentStopCnt) {
