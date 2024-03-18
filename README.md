@@ -21,3 +21,22 @@ tr:
   # 错误信息包含（多个用分号分割）【需要修改】
   errorMsg: err torrent banned;torrent does not exist
 ```
+
+## 1.0.3 新增minSeeder、maxSeeder、maxTorrentStopCnt字段
+```
+pter:
+    # 官种页面（带排序参数,按照做种人数升序）
+    url: https://pterclub.com/officialgroup.php?inclbookmarked=0&incldead=1&spstate=2&&sort=7&type=asc&tag_internal=yes&page=
+    # cookie【需要修改】
+    cookie: xxxx
+    # 单种最大体积（MB）【需要修改】
+    maxDefendSize: 900
+    # qb保种标签
+    tag: pter
+    # 单种最小保种人数【需要修改】
+    minSeeder: 1
+    # 单种最大保种人数【需要修改】
+    maxSeeder: 5
+    # 猫站4小时流控数量【需要修改】
+    maxTorrentStopCnt: 80
+```
