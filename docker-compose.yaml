@@ -10,7 +10,7 @@ services:
     volumes:
       - 【修改后的application.yml文件路径】:/application.yml
     # 启动命令【不需要修改】
-    command: java -jar /joey/server/pter-1.0.2.jar --spring.config.location=/application.yml
+    command: java -jar /joey/server/pter.jar --spring.config.location=/application.yml
     depends_on:
       - redis
 
