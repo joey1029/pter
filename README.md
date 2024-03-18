@@ -22,7 +22,7 @@ tr:
   errorMsg: err torrent banned;torrent does not exist
 ```
 
-## 1.0.3 新增minSeeder、maxSeeder、maxTorrentStopCnt字段
+## 1.0.2 新增minSeeder、maxSeeder、maxTorrentStopCnt字段
 ```
 pter:
     # 官种页面（带排序参数,按照做种人数升序）
