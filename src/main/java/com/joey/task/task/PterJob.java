@@ -40,6 +40,16 @@ public class PterJob extends QuartzJobBean {
     @Value("${pter.tag}")
     private String pterTag;
 
+    @Value("${pter.minSeeder}")
+    private Integer minSeeder;
+
+
+    @Value("${pter.maxSeeder}")
+    private Integer maxSeeder;
+
+    @Value("${pter.maxTorrentStopCnt}")
+    private Integer maxTorrentStopCnt;
+
     @Autowired
     private QbittorrentUtil qbittorrentUtil;
 
@@ -131,7 +141,7 @@ public class PterJob extends QuartzJobBean {
                 continue;
             }
             //做种+下载人数在2-5人
-            if (seeder >= 2 && seeder + leecher <= Constants.maxSeeder) {
+            if (seeder >= minSeeder && seeder + leecher <= maxSeeder) {
                 String sizeStr = tdEls.get(11).text();
 //                float torSize = new BigDecimal(sizeStr.split(" ")[0]).floatValue();
                 float torSize = convertMB(sizeStr);
@@ -139,24 +149,24 @@ public class PterJob extends QuartzJobBean {
                 if (torSize > minTorrentSize && torSize < maxTorrentSize) {
                     String dlUrlStr = "https://pterclub.com/" + tdEls.get(6).getElementsByTag("a").get(0).attr("href");
 
-                    if (!tdEls.get(3).getElementsByTag("img").hasClass("progbargreen") && curTorrentCnt < Constants.maxTorrentStopCnt) {
+                    if (!tdEls.get(3).getElementsByTag("img").hasClass("progbargreen") && curTorrentCnt < maxTorrentStopCnt) {
                         log.info("种子链接: " + dlUrlStr);
                         list.add(dlUrlStr);
                         curTorrentCnt++;
                     }
-                    if (curTorrentCnt >= Constants.maxTorrentStopCnt) {
-                        log.info(Constants.maxSeeder + "人种下满" + Constants.maxTorrentStopCnt + "个了");
+                    if (curTorrentCnt >= maxTorrentStopCnt) {
+                        log.info(maxSeeder + "人种下满" + maxTorrentStopCnt + "个了");
                         continueFlag.set(false);
                         return list;
                     }
                 }
             }
             //做种人数大于等于7人
-            else if (seeder > Constants.maxSeeder) {
+            else if (seeder > maxSeeder) {
                 sevenTorrentCnt++;
             }
             if (sevenTorrentCnt > maxSevenTorrentStopCnt) {
-                log.info("没有" + Constants.maxSeeder + "人种了");
+                log.info("没有" + maxSeeder + "人种了");
                 continueFlag.set(false);
                 return list;
             }

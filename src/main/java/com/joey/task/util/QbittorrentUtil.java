@@ -35,6 +35,10 @@ public class QbittorrentUtil {
     private Integer qbittorrentDownloadLimit;
 
 
+    @Value("${pter.maxTorrentStopCnt}")
+    private Integer maxTorrentStopCnt;
+
+
     public String login() {
         HttpResponse response = HttpUtil.createPost(qbittorrentUrl + "/api/v2/auth/login").form("username", qbittorrentUsername).form("password", qbittorrentPassword).execute();
         if (response.getStatus() == 200) {
@@ -75,7 +79,7 @@ public class QbittorrentUtil {
     public boolean addTorrents(String fileUrl, String sid, String tag, AtomicBoolean continueFlag) {
         //限流
         int queueObjectSize = QueueUtils.getQueueObjectSize(Constants.PTERQUEUE);
-        if (queueObjectSize < Constants.maxTorrentStopCnt) {
+        if (queueObjectSize < maxTorrentStopCnt) {
             QueueUtils.addQueueObject(Constants.PTERQUEUE, System.currentTimeMillis());
         } else {
             Long firstTime = QueueUtils.elementQueueObject(Constants.PTERQUEUE);
