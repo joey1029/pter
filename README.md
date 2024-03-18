@@ -5,7 +5,7 @@
 * 启动前需要修改[application.yml](https://github.com/joey1029/pter/blob/main/src/main/resources/application.yml)文件
 * 使用[docker-compose](https://github.com/joey1029/pter/blob/main/docker-compose.yaml)启动部署服务
 
-## 2.删除错误种
+## 1.0.1 新增删除错误种
 * 新增自动删种功能
   请求：http://xxx:29223/delErrorTorrents
 ```
