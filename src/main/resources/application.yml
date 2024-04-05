@@ -63,6 +63,8 @@ spring:
 quartz:
     # 时间正则（每小时一次）
     cron: 0 10 0/1 * * ?
+    # 98时间正则
+    shtcron: 0 35 1 * * ?
 
 tr:
     # tr地址【需要修改】
@@ -74,3 +76,8 @@ tr:
     # 错误信息包含（多个用分号分割）【需要修改】
     errorMsg: err torrent banned;torrent does not exist
 
+sht:
+    url: https://1kdj5.app/
+    ck: xxxxx
+    # 英文;分割
+    replyMsgs: 身材很好啊;感觉要被榨干;怎一个6字了得;妹子真不错;感觉要精尽人亡了;看着感觉很顶啊;就喜欢这种类型的
