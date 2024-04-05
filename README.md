@@ -40,3 +40,16 @@ pter:
     # 猫站4小时流控数量【需要修改】
     maxTorrentStopCnt: 80
 ```
+
+## 1.0.3 签到
+```
+quartz:
+    # 98时间正则
+    shtcron: 0 35 1 * * ?
+    
+sht:
+    url: https://1kdj5.app/
+    cookie: xxxxx
+    # 英文;分割
+    replyMsgs: xxxx;xxxx;xxxx
+```
