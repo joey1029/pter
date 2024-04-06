@@ -13,13 +13,17 @@ import org.seimicrawler.xpath.JXNode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
 
-@Component
+@RestController
 @Slf4j
 public class SHTJob extends QuartzJobBean {
 
@@ -39,14 +43,17 @@ public class SHTJob extends QuartzJobBean {
     public String[] replyMsg;
 
 
+    @RequestMapping("/sht")
     public void sht() {
         String[] replyMsgArr = replyMsgs.split(";");
         replyMsg = replyMsgArr;
         String forumBody = getForumHtml();
+        log.info("页面:{}", forumBody);
         long days = System.currentTimeMillis() / (24 * 3600 * 1000);
-        int mod = (int) (days % 3);
+        int mod = (int) (days % 5);
         if (StringUtils.isNotBlank(forumBody)) {
             int index = new Random().nextInt(replyMsg.length);
+            log.info("随机评论：{}", replyMsg[index]);
             reply(fid, forumBody, replyMsg[index], mod);
         }
     }
@@ -72,12 +79,12 @@ public class SHTJob extends QuartzJobBean {
             JXNode jxNode = jxNodes.get(i);
             if (jxNode.asString().contains("normalthread_")) {
                 String tid = jxNode.asString().split("_")[1];
-                if (mod != index) {
-                    index++;
-                    continue;
+                index++;
+                if (index == mod) {
+                    String msg = doRelpy(fid, tid, formhash, replyMsg);
+                    log.info("回复成功，内容：{}", replyMsg);
+                    return;
                 }
-                String msg = doRelpy(fid, tid, formhash, replyMsg);
-                log.info("回复成功，内容：{}", replyMsg);
             }
         }
     }
