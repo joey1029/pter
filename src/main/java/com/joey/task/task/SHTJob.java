@@ -11,6 +11,7 @@ import org.quartz.JobExecutionException;
 import org.seimicrawler.xpath.JXDocument;
 import org.seimicrawler.xpath.JXNode;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ import java.util.Random;
 
 @RestController
 @Slf4j
-public class SHTJob extends QuartzJobBean {
+public class SHTJob  {
 
 
     @Value("${sht.url}")
@@ -44,6 +45,7 @@ public class SHTJob extends QuartzJobBean {
 
 
     @RequestMapping("/sht")
+    @Scheduled(cron = "${quartz.shtcron}")
     public void sht() {
         String[] replyMsgArr = replyMsgs.split(";");
         replyMsg = replyMsgArr;
@@ -128,8 +130,5 @@ public class SHTJob extends QuartzJobBean {
     }
 
 
-    @Override
-    protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        sht();
-    }
+
 }

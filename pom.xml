@@ -113,6 +113,9 @@
                 <includes>
                     <include>**/*.*</include>
                 </includes>
+                <excludes>
+                    <exclude>application-cp.yml</exclude>
+                </excludes>
             </resource>
         </resources>
     </build>

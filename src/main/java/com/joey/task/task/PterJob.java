@@ -14,6 +14,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +30,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @RequestMapping
-public class PterJob extends QuartzJobBean {
+public class PterJob  {
 
     @Value("${pter.url}")
     private String pterUrl;
@@ -72,6 +73,7 @@ public class PterJob extends QuartzJobBean {
 
 
     @RequestMapping("/spider")
+    @Scheduled(cron = "${quartz.cron}")
     public void spiderPter() {
         long begin = System.currentTimeMillis();
         continueFlag.set(true);
@@ -189,8 +191,5 @@ public class PterJob extends QuartzJobBean {
         return 0f;
     }
 
-    @Override
-    protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        spiderPter();
-    }
+
 }
