@@ -65,6 +65,8 @@ quartz:
     cron: 0 10 0/1 * * ?
     # 98时间正则
     shtcron: 0 35 1 * * ?
+    # 删猫站删种信息
+    delptermsgcron: 0 20 0/4 * * ?
 
 tr:
     # tr地址【需要修改】
