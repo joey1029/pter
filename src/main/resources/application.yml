@@ -67,6 +67,8 @@ quartz:
     shtcron: 0 35 1 * * ?
     # 删猫站删种信息
     delptermsgcron: 0 20 0/4 * * ?
+    # tr删除猫ban种
+    trdelbancron: 0 35 2 * * ?
 
 tr:
     # tr地址【需要修改】

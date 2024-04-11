@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +40,7 @@ public class TransmissionController {
 
 
     @RequestMapping("delErrorTorrents")
+    @Scheduled(cron = "${quartz.trdelbancron}")
     public String delErrorTorrents() {
         //构建授权信息
         buildAuthorization();
