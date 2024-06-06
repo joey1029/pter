@@ -63,6 +63,10 @@ spring:
         ssl: false
 
 quartz:
-    # 时间正则（每小时一次）
+    # pterclub定时任务
     cron: 0 40 0/2 * * ?
+    # 删除站内消息
+    delptermsgcron: 0 10 15 * * ?
+    # 删除tr ban种子
+    trdelbancron: 0 10 5 * * ?
 
