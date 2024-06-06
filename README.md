@@ -26,11 +26,11 @@ tr:
 ```
 pter:
     # 官种页面（带排序参数,按照做种人数升序）
-    url: https://pterclub.com/officialgroup.php?inclbookmarked=0&incldead=1&spstate=2&&sort=7&type=asc&tag_internal=yes&page=
+    url: https://pterclub.com/officialgroup.php?inclbookmarked=0&incldead=1&spstate=2&tag_internal=yes&sort=7&type=asc&page=
     # cookie【需要修改】
     cookie: xxxx
-    # 单种最大体积（MB）【需要修改】
-    maxDefendSize: 900
+    # 单种最大大小（MB）【需要修改】
+    maxDefendSize: 5000
     # qb保种标签
     tag: pter
     # 单种最小保种人数【需要修改】
@@ -39,17 +39,8 @@ pter:
     maxSeeder: 5
     # 猫站4小时流控数量【需要修改】
     maxTorrentStopCnt: 80
+    # 开始页数【需要修改】
+    startPage: 1
 ```
 
-## 1.0.3 签到
-```
-quartz:
-    # 98时间正则
-    shtcron: 0 35 1 * * ?
-    
-sht:
-    url: https://1kdj5.app/
-    cookie: xxxxx
-    # 英文;分割
-    replyMsgs: xxxx;xxxx;xxxx
-```
+
