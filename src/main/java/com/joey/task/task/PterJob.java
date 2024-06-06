@@ -47,6 +47,9 @@ public class PterJob  {
     @Value("${pter.maxTorrentStopCnt}")
     private Integer maxTorrentStopCnt;
 
+    @Value("${pter.startPage}")
+    private Integer startPage;
+
     @Autowired
     private QbittorrentUtil qbittorrentUtil;
 
@@ -73,7 +76,7 @@ public class PterJob  {
     public void spiderPter() {
         long begin = System.currentTimeMillis();
         continueFlag.set(true);
-        pageNum = 0;
+        pageNum = startPage;
         String sid = qbittorrentUtil.login();
         boolean chooseDate = false;
         do {
