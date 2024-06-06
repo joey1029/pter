@@ -1,7 +1,7 @@
 version: '3'
 services:
   defend_cat:
-    image: joey1029/defend_cat:1.0.2
+    image: joey1029/defend_cat:1.0.7
     restart: always
     container_name: defend_cat
     ports:
